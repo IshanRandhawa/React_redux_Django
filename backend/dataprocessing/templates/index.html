@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+         <title>{%block title%}Find youtubers{%endblock title%} </title>
+        <link rel="icon" type="image/x-icon" href="{%static 'assets/img/favicon.ico' %}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        {%block media%} {%endblock media%}
+        <link href="{%static 'css/styles.css' %}" rel="stylesheet" />  
+
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container">
+                
+                <a class="navbar-brand js-scroll-trigger" href="#about">{%block top%} Tech used {%endblock top%}</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        
+                        <li class="nav-item">{%block searchlink%} <a class="nav-link js-scroll-trigger" href= "#projects" >Search</a></li>{%endblock searchlink%}
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Dataset</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container d-flex h-100 align-items-center">
+                <div class="mx-auto text-center">
+                    {% block content %} 
+                    <h1 class="mx-auto my-0 text-uppercase">Find youtubers near you</h1>
+                    <h2 class="text-white-50 mx-auto mt-2 mb-5"> Number of channels found is {{ records }}</h2>
+                    <a class="btn btn-primary js-scroll-trigger" href="#about">Learn how it works</a>
+                    {% endblock content %}
+                </div>
+            </div>
+        </header>
+
+        <!-- About-->
+        {% block about %}      
+        <section class="about-section text-left" id="about">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="text-white mb-4">Djnago and Youtube Data API</h2>
+                        <p class="text-white-50">
+                            Uses your query term to search youtube for videos that match your interests and were uploaded in the city of your choice
+                        </p>
+                        <div class="container">
+                            <!-- Project One Row-->
+                            <h4 class="text-white mb-4"> Channel data </h4>
+                  
+                            <p class="text-white-50">This dataset contains data about terms and locations already searched by users</p>
+                            
+                            <a href="/database" class="btn btn-info" role="button">Search the database</a></div>
+                        </div>
+                        </form> 
+                        
+                        </div>
+  
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        {% endblock about %}
+
+        {% block projects %}
+
+        <!-- Projects-->
+        <section class="projects-section bg-light" id="projects">
+ 
+                    </div>
+                  <div class="col-xl-4 col-lg-5">
+                  </div>
+                  </div>
+              </div>
+                </div>
+
+
+                
+                <!-- Project Two Row-->
+                    <div class= "form-control-lg">
+                      <form action = "" method = "post">  
+                
+                          {% csrf_token %}   
+                              {{ form.as_table}} 
+                          <script>
+                          function updateTextInput(val) {
+                              document.getElementById('number_queries').value=val; 
+                          }
+                            </script>
+                          <input type="Integer" id="number_queries"  placeholder = '5' value="">
+                          <button type="submit" class="btn btn-primary btn-lg">Search</button>
+                          </div>
+              </div>
+            </div>
+            
+        </section>
+
+        {% endblock projects %}
+
+        <!-- Signup-->
+
+        <!-- Contact-->
+
+        <!-- Footer-->
+        <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © IshanRandhawa 2020</div></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Core theme JS-->
+
+        <script src="{%static 'js/scripts.js' %}">
+
+        {%block js%} {%endblock js%}
+    </script>
+    </body>
+</html>
