@@ -130,7 +130,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-django_heroku.settings(locals())
 
 CSRF_COOKIE_NAME = "XSRF-TOKEN"
 # Static files (CSS, JavaScript, Images)
@@ -139,10 +138,7 @@ CSRF_COOKIE_NAME = "XSRF-TOKEN"
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build , static'),
+    os.path.join(BASE_DIR, 'build/static'),
 ]
-
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 CORS_ORIGIN_ALLOW_ALL = True
+django_heroku.settings(locals())
