@@ -9,7 +9,7 @@ export const getYtubeData = (body) => (dispatch) => {
   dispatch({ type: GET_YTUBEDATA_REQUEST });
   axios({
     method: "post",
-    url: "http://127.0.0.1:8000/data/",
+    url: "data/",
     data: body,
   })
     .then((response) => {
