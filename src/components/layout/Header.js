@@ -11,11 +11,11 @@ export class Header extends Component {
     const { Header, Content, Footer } = Layout;
 
     return (
-      <Layout className="layout">
+      <Layout className="root">
         <Header>
-          <div className="logo" />
+          <div className="root" />
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
-            <Menu.Item key="1">DJANGO_REACT_EXAMPLE</Menu.Item>
+            <Menu.Item key="1">Example Project</Menu.Item>
           </Menu>
         </Header>
         <Content style={{ padding: "0 50px" }}>

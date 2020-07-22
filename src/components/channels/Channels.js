@@ -115,10 +115,10 @@ export class Channels extends Component {
 
   componentDidMount() {
     this.props.getChannels();
+    console.log("Mounted");
   }
   render() {
     const data = this.props.channels;
-    console.log(data);
     const { xScroll, yScroll, ...state } = this.state;
 
     const scroll = {};
@@ -137,7 +137,6 @@ export class Channels extends Component {
       tableColumns[0].fixed = true;
       tableColumns[tableColumns.length - 1].fixed = "right";
     }
-    console.log(this.props.channels);
     return (
       <>
         {/* <Form
