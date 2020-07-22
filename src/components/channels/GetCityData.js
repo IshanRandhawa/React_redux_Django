@@ -30,7 +30,7 @@ class GetCityData extends Component {
       city: "",
       data: {},
       text: "",
-      numb: "",
+      numb: 5,
       show: false,
     };
   }
@@ -97,18 +97,27 @@ class GetCityData extends Component {
   //     });
   // };
   onButtonClick = () => {
-    const body = {
-      query: this.state.text,
-      city:
-        this.state.data.main &&
-        ` [['${this.state.data.name}' , '${Number(
-          this.state.data.coord.lat
-        )} , ${Number(this.state.data.coord.lon)}']]`,
-      number_queries: this.state.numb,
-    };
-    this.props.getYtubeData(body);
-    console.log("reducer data" + this.props.ytubeData);
-    console.log("reducer loading" + this.props.loading);
+    if (this.state.text && this.state.data.name) {
+      this.setState({
+        show: false,
+      });
+      const body = {
+        query: this.state.text,
+        city:
+          this.state.data.main &&
+          ` [['${this.state.data.name}' , '${Number(
+            this.state.data.coord.lat
+          )} , ${Number(this.state.data.coord.lon)}']]`,
+        number_queries: this.state.numb,
+      };
+      this.props.getYtubeData(body);
+      console.log("reducer data" + this.props.ytubeData);
+      console.log("reducer loading" + this.props.loading);
+    } else {
+      this.setState({
+        show: true,
+      });
+    }
   };
 
   render() {
@@ -120,6 +129,9 @@ class GetCityData extends Component {
     } else {
       return (
         <Fragment>
+          <div>
+            {this.state.show ? <h2>Please fill the data correctly</h2> : ""}
+          </div>
           <div>
             <input
               type="text"
@@ -143,7 +155,7 @@ class GetCityData extends Component {
             <input
               type="number"
               className="search"
-              placeholder="Time for search"
+              placeholder="Number of results"
               value={numb}
               onChange={this.handleNumbChange}
             />
@@ -166,7 +178,7 @@ class GetCityData extends Component {
               </div>
             )}
             <div>
-              {this.props.ytubedata.length > 1 ? (
+              {this.props.ytubedata.length > 0 ? (
                 <SearchedData
                   ytubedata={this.props.ytubedata}
                   city={city}

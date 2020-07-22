@@ -4,7 +4,7 @@ import { GET_CHANNELS } from "./types";
 
 export const getChannels = () => (dispatch) => {
   axios
-    .get("https://djreactredux.herokuapp.com//api/api/")
+    .get("api/api/")
     .then((res) => {
       dispatch({
         type: GET_CHANNELS,
