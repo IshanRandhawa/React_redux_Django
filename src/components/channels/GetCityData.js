@@ -32,6 +32,7 @@ class GetCityData extends Component {
       text: "",
       numb: 5,
       show: false,
+      showtable: false,
     };
   }
   search = async (e) => {
@@ -100,6 +101,7 @@ class GetCityData extends Component {
     if (this.state.text && this.state.data.name) {
       this.setState({
         show: false,
+        showtable: true,
       });
       const body = {
         query: this.state.text,
@@ -116,82 +118,96 @@ class GetCityData extends Component {
     } else {
       this.setState({
         show: true,
+        showtable: false,
       });
     }
   };
 
   render() {
-    const { data, city, text, numb } = this.state;
+    const { data, city, text, numb, showtable } = this.state;
     console.log("reducer data" + this.props.ytubedata);
     console.log("reducer loading" + this.props.loading);
-    if (this.props.loading) {
-      return <LoadingSpinner />;
-    } else {
-      return (
-        <Fragment>
+
+    return (
+      <Fragment>
+        <div>
+          <input
+            type="text"
+            className="search"
+            placeholder="Search for your city/place name"
+            value={city}
+            onChange={this.handleChange}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                return this.onButtonClick();
+              }
+            }}
+          />
+          <input
+            type="text"
+            className="search"
+            placeholder="What is your interest"
+            value={text}
+            onChange={this.handleTextChange}
+          />
+          <input
+            type="number"
+            className="search"
+            placeholder="Number of results"
+            value={numb}
+            onChange={this.handleNumbChange}
+          />
+          <MDBBtn
+            gradient="aqua"
+            type="primary"
+            onClick={this.onButtonClick}
+            disabled={this.props.loading}
+          >
+            Search
+          </MDBBtn>
           <div>
-            {this.state.show ? <h2>Please fill the data correctly</h2> : ""}
-          </div>
-          <div>
-            <input
-              type="text"
-              className="search"
-              placeholder="Search for your city/place name"
-              value={city}
-              onChange={this.handleChange}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  return this.onButtonClick();
-                }
-              }}
-            />
-            <input
-              type="text"
-              className="search"
-              placeholder="What is your interest"
-              value={text}
-              onChange={this.handleTextChange}
-            />
-            <input
-              type="number"
-              className="search"
-              placeholder="Number of results"
-              value={numb}
-              onChange={this.handleNumbChange}
-            />
-            <MDBBtn
-              gradient="aqua"
-              type="primary"
-              onClick={this.onButtonClick}
-              disabled={this.props.loading}
-            >
-              Search
-            </MDBBtn>
-            {this.state.data.main && (
-              <div className="city">
-                <h2 className="city-name">
-                  <span>{this.state.data.name}</span>
-                  <sup>{this.state.data.sys.country}</sup>
-                  <span>{countries[data.sys.country].emoji}</span>
-                </h2>
-                <div className="city-name">{text}</div>
-              </div>
+            {this.state.show ? (
+              <MDBBtn gradient="peach" type="primary">
+                Please fill the data correctly
+              </MDBBtn>
+            ) : (
+              ""
             )}
-            <div>
-              {this.props.ytubedata.length > 0 ? (
-                <SearchedData
-                  ytubedata={this.props.ytubedata}
-                  city={city}
-                  query={text}
-                />
-              ) : (
-                ""
-              )}
-            </div>
           </div>
-        </Fragment>
-      );
-    }
+          <div class="App-header">
+            {this.props.loading ? (
+              <MDBBtn gradient="purple" type="primary">
+                <LoadingSpinner />
+              </MDBBtn>
+            ) : (
+              ""
+            )}
+          </div>
+
+          {this.state.data.main && (
+            <div className="city">
+              <h2 className="city-name">
+                <span>{this.state.data.name}</span>
+                <sup>{this.state.data.sys.country}</sup>
+                <span>{countries[data.sys.country].emoji}</span>
+              </h2>
+              <div className="city-name">{text}</div>
+            </div>
+          )}
+          <div>
+            {showtable ? (
+              <SearchedData
+                ytubedata={this.props.ytubedata}
+                city={city}
+                query={text}
+              />
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+      </Fragment>
+    );
   }
 }
 
